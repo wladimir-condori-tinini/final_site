@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidade-jogos</title>
+    <link rel="stylesheet" href="siteoficial.css">
+    <script src="../js/funcoes.js"></script>
+
+</head>
+
+<body>
+    <div class="body_home">
+        <div class="header_home">
+            <div class="navbar_home">
+                <div class="img_menu">
+                    <div class="hamburger-menu">
+                        <input id="menu__toggle" type="checkbox" />
+                        <label class="menu__btn" for="menu__toggle">
+                            <span></span>
+                        </label>
+
+                        <ul class="menu__box">
+                            <li><a class="menu__item" href="Home.html">Home</a></li>
+                            <li><a class="menu__item" href="profile.html">Meu Perfil</a></li>
+                            <li><a class="menu__item" href="pag_config.html">configurações</a></li>
+                            <nav class="dp-menu">
+                                <ul>
+                                    <li><a class="menu__item" href="#">comunidades</a>
+                                        <ul>
+                                            <li><a href="Comunidade_jogos.html">Jogos</a></li>
+                                            <li><a href="Comunidade_filmes.html">Filmes</a></li>
+                                            <li><a href="Comunidade_animes.html">Animes</a></li>
+                                            <li><a href="Comunidade_series.html">Séries</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="txt_usuario" onclick="limparSessao()">Sair</div>
+            </div>
+        </div>
+        <div class="bannerpgi">
+            <div class="card_tela_pgComunidade">
+                <div class="div_Descrição_comunidade">
+                    Seja bem-vindo a comunidade de jogos
+                    aqui aparecerão todas as postagens
+                    a respeito de jogos no geral &hearts; !!
+                </div>
+                <div class="container">
+                    <a class="btn" onclick="popupToggle();"><span>Entrar</span></a>
+                    <div id="popup">
+                        <div class="content">
+                            <h2>Postar</h2>
+                            <div class="inputBox">
+                                <input type="text" id="input_assunto" placeholder="Assunto">
+                            </div>
+                            <div class="inputBox">
+                                <input type="text" id="input_link_img" placeholder="Insira o link da imagem">
+                            </div>
+                            <div class="inputBox">
+                                <input type="text" id="input_descricao" placeholder="Insira seu texto">
+                            </div>
+                            <div class="inputBox">
+                                <input type="button" value="postar" class="btnC" onclick="publicar()">
+                            </div>
+                            <div id="div_aguardar" class="loading-div">
+                                <img src="./assets/circle-loading.gif" id="loading-gif">
+                            </div>
+                            <div class="alerta_erro">
+                                <div class="card_erro" id="cardErro">
+                                    <span id="mensagem_erro"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_erros_login">
+
+                        <div id="div_aguardar" class="loading-div">
+                            <img src="./assets/circle-loading.gif" id="loading-gif">
+                        </div>
+
+                        <div id="div_erros_login">
+                        </div>
+                        <a class="close" onclick="popupToggle();"><img
+                                src="https://cdn-icons-png.flaticon.com/512/864/864393.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="card_post" id="card_post">
+                    <div class="assunto_post"> Melhor campeão q já existiu!!! </div>
+                    <div class="box_post_imgeDesc">
+                        <div class="img_post"> <img
+                                src="https://c4.wallpaperflare.com/wallpaper/994/445/313/hextech-rammus-league-of-legends-riot-games-skin-hd-wallpaper-thumb.jpg"
+                                alt=""></div>
+                        <div class="desc_img">
+                            <p>cabei de destruir uma partida de rammus, slk muito easy kkkk alguem ae pra ser
+                                carregado?:) add ae "HEXTEC Wlad" </p>
+                            <div class="info_usuario">Postado por <span>wlad</span> dia 05/06/22 as 13:30 pm</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    function publicar() {
+        aguardar();
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var assuntoVar = input_assunto.value;
+        var img_linkVar = input_link_img.value;
+        var descricaoVar = input_descricao.value;
+        var categoriaVar = "jogos";
+        var fk_usuarioVar = sessionStorage.ID_USUARIO;
+
+        if (assuntoVar == "" || img_linkVar == "" || descricaoVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "Preencha todos os campos para realizar a postagem!";
+
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        if (assuntoVar.length <= 3 || assuntoVar >= 15) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "Ops, seu assunto tem menos que 3 letras ou maior que 15 letras.";
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 4000)
+        }
+
+        if (img_linkVar.length >= 200) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "link maior que 200 caracteres não aceitamos";
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 4000)
+        }
+        if (descricaoVar.length <= 10 || descricaoVar.length >= 200) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "descrição curta ou longa demais";
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 4000)
+        }
+
+        // Enviando o valor da nova input
+        fetch("/publicar/:idUsuario", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                titulo_postagem: assuntoVar,
+                link_img_postagem: img_linkVar,
+                categoria_postagem: categoriaVar,
+                descricao_postagem: descricaoVar,
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = "Postagem realizado com sucesso!";
+                window.location.reload();
+                limparFormulario();
+                finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+    function listar() {
+        for (var contador = 0; contador <= 1; contador++) {
+            card_post.innerHTML += `<div class="card_post" id="card_post">
+                    <div class="assunto_post"> ${assunto} </div>
+                    <div class="box_post_imgeDesc">
+                        <div class="img_post"> <img src="${img_link}" alt=""></div>
+                        <div class="desc_img">
+                            <p>"${descricao}" </p>
+                            <div class="info_usuario">Postado por <span>${nome}</span> dia 05/06/22 as 13:30 pm</div>
+                        </div>
+                    </div>
+                    </div>`
+        }
+    }
+    function popupToggle() {
+        const popup = document.getElementById('popup');
+        popup.classList.toggle('active')
+    }
+</script>

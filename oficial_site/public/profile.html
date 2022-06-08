@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="siteoficial.css">
+    <script src="js/funcoes.js"></script>
+
+</head>
+
+<body onload="profile_info()">
+    <div class="body_home"> 
+        <div class="header_home">
+            <div class="navbar_home">
+                <div class="img_menu">
+                    <div class="hamburger-menu">
+                        <input id="menu__toggle" type="checkbox" />
+                        <label class="menu__btn" for="menu__toggle">
+                            <span></span>
+                        </label>
+
+                        <ul class="menu__box">
+                            <li><a class="menu__item" href="home.html">Home</a></li>
+                            <li><a class="menu__item" href="profile.html">Meu Perfil</a></li>
+                            <li><a class="menu__item" href="pag_config.html">configurações</a></li>
+                            <nav class="dp-menu">
+                                <ul>
+                                    <li><a class="menu__item" href="#">comunidades</a>
+                                        <ul>
+                                            <li><a href="Comunidade_jogos.html">Jogos</a></li>
+                                            <li><a href="Comunidade_filmes.html">Filmes</a></li>
+                                            <li><a href="Comunidade_animes.html">Animes</a></li>
+                                            <li><a href="Comunidade_series.html">Séries</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="txt_usuario" onclick="limparSessao()">Sair</div>
+            </div>
+        </div>
+        <div class="bannerpgp">
+            <div class="card_tela_pgperfil">
+                <div class="card_peril_img">
+                </div>
+                <div class="info_usuario_perfil">
+                    <div class="nome_usuario_perfil">
+                        <h3>Olá, <span id="span_nome">usuário</span>!</h3>
+                    </div>
+                    <div class="idade_usuario_perfil">
+                        <p><span id="span_idade">idade </span> Anos</p> 
+                    </div>
+                </div>
+                <div class="contatos_usuario_perfil">
+                    <p>Descrição</p>
+                </div>
+                <div class="descricao_usuario_perfil">
+                    <p>CURTO ANIMES E JOGAR BEM VINDO AO MEU PERFIL
+                    </p>
+                </div>
+                <div class="div_txt_user">*Publicar*</div>
+                <select name="Categoria" class="select_conf" id="">
+                    <option value="Comunidade">Comunidade</option>
+                    <option value="jogos">Jogos</option>
+                    <option value="filmes">Filmes</option>
+                    <option value="animes">Animes</option>
+                    <option value="series">Séries</option>
+                </select>
+                    <input type="text" class="assunto_post" placeholder="Assunto" id="input_assunto">
+                    <input type="text" class="post_descricao_user" placeholder="Descrição" id="input_descricao">
+                    <button id="btn_simples">Publicar</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+function limparSessao() {
+    // aguardar();
+    sessionStorage.clear();
+    // finalizarAguardar();
+    window.location = "index.html";
+}
+function profile_info(){
+    var nome = sessionStorage.NOME_USUARIO;
+    var idade = sessionStorage.USER_YEAR;
+    span_nome.innerHTML = nome
+    span_idade.innerHTML = idade
+}
+</script>

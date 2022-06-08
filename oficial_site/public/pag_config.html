@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>configuração</title>
+    <link rel="stylesheet" href="siteoficial.css">
+    <!-- <script src="js/funcoes.js"></script> -->
+
+</head>
+
+<body onload="Recarregar()">
+    <div class="body_home">
+        <div class="header_home">
+            <div class="navbar_home">
+                <div class="img_menu">
+                    <div class="hamburger-menu">
+                        <input id="menu__toggle" type="checkbox" />
+                        <label class="menu__btn" for="menu__toggle">
+                            <span></span>
+                        </label>
+
+                        <ul class="menu__box">
+                            <li><a class="menu__item" href="Home.html">Home</a></li>
+                            <li><a class="menu__item" href="profile.html">Meu Perfil</a></li>
+                            <li><a class="menu__item" href="pag_config.html">configurações</a></li>
+                            <nav class="dp-menu">
+                                <ul>
+                                    <li><a class="menu__item" href="#">comunidades</a>
+                                        <ul>
+                                            <li><a href="Comunidade_jogos.html">Jogos</a></li>
+                                            <li><a href="Comunidade_filmes.html">Filmes</a></li>
+                                            <li><a href="Comunidade_animes.html">Animes</a></li>
+                                            <li><a href="Comunidade_series.html">Séries</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="txt_usuario" onclick="limparSessao()">Sair</div>
+            </div>
+        </div>
+        <div class="bannerpgconf">
+            <div class="card_tela_pgconf">
+                <div class="alerta_erro">
+                    <div class="card_erro" id="cardErro">
+                        <span id="mensagem_erro"></span>
+                    </div>
+                </div>
+                <div class="alterar"> O que deseja alterar?</div>
+                <div class="box_alteracoes">
+                    <div class="mini_box">
+                    Nome 
+                    <input type="text" class="input_config" id="input_new_name">
+                    Idade
+                    <input type="number" class="input_config" id="input_new_year">
+                    </div>
+                    <div class="mini_box">
+                    E-mail
+                    <input type="text" class="input_config" id="input_new_email">
+                    Senha
+                    <input type="password" class="input_config" id="input_new_password">
+                    </div>
+                </div>
+                    <div class="botoes_desc">
+                        <button class="btn_descricao" onclick="atualizar_Cadastro()">Salvar</button>
+                        <button class="btn_descricao">Cancelar</button>
+                    </div>
+                    <div id="div_aguardar" class="loading-div">
+                        <img src="./assets/circle-loading.gif" id="loading-gif">
+                    </div>
+            
+                    <div id="div_erros_login">
+                        
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    function atualizar_Cadastro() {
+        // aguardar();
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var idVar = sessionStorage.ID_USUARIO;
+
+        var newname = input_new_name.value;
+        var newyear = input_new_year.value;
+        var newemail = input_new_email.value;
+        var newpassword = input_new_password.value;
+
+        if (newname == "" || newyear == "" || newemail == "" || newpassword == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "Preencha todos os campos para prosseguir!";
+
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        if (newemail.indexOf("@") == -1 || newemail.indexOf(".com") == -1) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "Ops, e-mail inválido! Verifique e tente novamente.";
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 4000)
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/atualizar", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                id: idVar,
+                userName: newname,
+                userEmail: newemail,
+                userPassword: newpassword,
+                userYear: newyear
+            })
+        }).then(function (resposta) {
+            console.log("resposta: ", resposta);
+            if (resposta.ok) {
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = "Cadastro realizado com sucesso!";
+                sumirMensagem();
+                window.location = "index.html";
+                // window.location.reload()
+            } else {
+                throw ("Houve um erro ao tentar realizar a aualização do cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+        return false;
+    }
+    function Recarregar(){
+        document.getElementById("input_new_name").value = sessionStorage.NOME_USUARIO;
+        document.getElementById("input_new_year").value = sessionStorage.USER_YEAR;
+        document.getElementById("input_new_email").value = sessionStorage.EMAIL_USUARIO;
+        document.getElementById("input_new_password").value = sessionStorage.USER_PASSWORD;
+    }
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+    function limparSessao() {
+    // aguardar();
+    sessionStorage.clear();
+    // finalizarAguardar();
+    window.location = "index.html";
+}
+</script>

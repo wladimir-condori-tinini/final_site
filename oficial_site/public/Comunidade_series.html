@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidade-jogos</title>
+    <link rel="stylesheet" href="siteoficial.css">
+    <script src="../js/funcoes.js"></script>
+
+</head>
+
+<body>
+    <div class="body_home">
+        <div class="header_home">
+            <div class="navbar_home">
+                <div class="img_menu">
+                    <div class="hamburger-menu">
+                        <input id="menu__toggle" type="checkbox" />
+                        <label class="menu__btn" for="menu__toggle">
+                            <span></span>
+                        </label>
+
+                        <ul class="menu__box">
+                            <li><a class="menu__item" href="Home.html">Home</a></li>
+                            <li><a class="menu__item" href="profile.html">Meu Perfil</a></li>
+                            <li><a class="menu__item" href="pag_config.html">configurações</a></li>
+                            <nav class="dp-menu">
+                                <ul>
+                                    <li><a class="menu__item" href="#">comunidades</a>
+                                        <ul>
+                                            <li><a href="Comunidade_jogos.html">Jogos</a></li>
+                                            <li><a href="Comunidade_filmes.html">Filmes</a></li>
+                                            <li><a href="Comunidade_animes.html">Animes</a></li>
+                                            <li><a href="Comunidade_series.html">Séries</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="txt_usuario" onclick="limparSessao()">Sair</div>
+            </div>
+        </div>
+        <div class="bannerpgi">
+            <div class="card_tela_pgComunidade">
+                <div class="div_Descrição_comunidade">
+                    Seja bem-vindo a comunidade de Séries
+                    aqui aparecerão todas as postagens 
+                    a respeito de jogos no geral &hearts; !!
+                </div>
+                <div class="card_post">
+                    <div class="assunto_post"> Peaky Blinders </div>
+                    <div class="box_post_imgeDesc">
+                        <div class="img_post"> <img src="https://tm.ibxk.com.br/2021/10/07/07155749619281.jpeg?ims=1200x675"alt=""></div>
+                        <div class="desc_img">
+                            <p>A Netflix anunciou nesta quinta-feira (10/3) a data de estreia da sexta e última temporada da série, é isso familia tamo no aguardo </p>
+                            <div class="info_usuario">Postado por <span>wlad</span> dia 05/06/22 as 13:30 pm</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card_post">
+                    <div class="assunto_post"> How i meet you mother </div>
+                    <div class="box_post_imgeDesc">
+                        <div class="img_post"> <img src="https://br.web.img3.acsta.net/pictures/210/609/21060989_20131126123652773.jpg" alt=""></div>
+                        <div class="desc_img">
+                            <p> falaram que a serie é boa, sera q é? kkk vou ver dpsss</p>
+                            <div class="info_usuario">Postado por <span>wlad</span> dia 05/06/22 as 15:35 pm</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card_post">
+                    <div class="assunto_post"> suits</div>
+                    <div class="box_post_imgeDesc">
+                        <div class="img_post"> <img src="https://upload.wikimedia.org/wikipedia/pt/2/25/Suits_temporada_7.jpg" alt=""></div>
+                        <div class="desc_img">
+                            <p>cabei de ver a série, slk mt loco da até vontade de virar adivogado kkk </p>
+                            <div class="info_usuario">Postado por <span>wlad</span> dia 05/06/22 as 19:23 pm</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    function limparSessao() {
+    // aguardar();
+    sessionStorage.clear();
+    // finalizarAguardar();
+    window.location = "index.html";
+}
+</script>
