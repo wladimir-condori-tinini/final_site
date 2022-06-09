@@ -11,7 +11,7 @@
 
 </head>
 
-<body onload="profile_info(), lista()">
+<body onload="profile_info() , lista()">
     <div class="body_home"> 
         <div class="header_home">
             <div class="navbar_home">
@@ -57,14 +57,8 @@
                         <p><span id="span_idade">idade </span> Anos</p> 
                     </div>
                 </div>
-                <div class="contatos_usuario_perfil">
-                    <p>Descrição</p>
-                </div>
-                <div class="descricao_usuario_perfil">
-                    <p>CURTO ANIMES E JOGAR BEM VINDO AO MEU PERFIL
-                    </p>
-                </div>
                 <div class="div_txt_user">*Publicações*</div>
+                <div id="card_post"></div>
             </div>
         </div>
     </div>
@@ -80,13 +74,16 @@ function limparSessao() {
     window.location = "index.html";
 }
 function profile_info(){
+    var idUsuario = sessionStorage.ID_USUARIO;
     var nome = sessionStorage.NOME_USUARIO;
     var idade = sessionStorage.USER_YEAR;
     span_nome.innerHTML = nome
     span_idade.innerHTML = idade
 }
 function lista(){
-        fetch("/avisos/listar/idUsuario", {
+    var idUsuario = sessionStorage.ID_USUARIO;
+
+        fetch(`/avisos/listar/${idUsuario}`, {
             method: "GET"
         }).then(function (resposta) {
             if (resposta.ok) {
@@ -99,9 +96,9 @@ function lista(){
             console.log(erro);
         })
     }
-    function listar(idUsuario) {
-        // var user_name = sessionStorage.USER_NAME
-
+    function listar(postagens) {
+        var nome = sessionStorage.NOME_USUARIO;
+        
         for (var contador = postagens.length -1 ; contador >= 0 ; contador--) {
             card_post.innerHTML += `<div class="card_post">
                     <div class="assunto_post"> ${postagens[contador].titulo_postagem} </div>
@@ -109,7 +106,7 @@ function lista(){
                         <div class="img_post"> <img src="${postagens[contador].link_img_post}" alt=""></div>
                         <div class="desc_img">
                             <p>"${postagens[contador].descricao_post}" </p>
-                            <div class="info_usuario">Postado por <span>${postagens[contador].user_name}</span> dia 05/06/22 as 13:30 pm</div>
+                            <div class="info_usuario">Postado por <span>${postagens[contador].user_name}</span></div>
                         </div>
                     </div>
                     </div>`

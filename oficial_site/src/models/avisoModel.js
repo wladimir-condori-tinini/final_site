@@ -1,9 +1,9 @@
 var database = require("../database/config");
 
-function listar(idUsuario) {
+function listapostagem(idUsuario) {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
-    select * from postagem join usuario on id = ${idUsuario};
+    select postagem.* , usuario.user_name from postagem , usuario where usuario.id = postagem.fk_usuario  and usuario.id = ${idUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -11,7 +11,7 @@ function listar(idUsuario) {
 function listar(categoria) {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
-    select * from postagem where categoria_postagem = "${categoria}";
+    select postagem.* , usuario.user_name from postagem , usuario where usuario.id = postagem.fk_usuario and categoria_postagem = "${categoria}";
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -92,5 +92,6 @@ module.exports = {
     pesquisarDescricao,
     publicar,
     editar,
-    deletar
+    deletar,
+    listapostagem
 }

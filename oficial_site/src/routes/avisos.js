@@ -19,12 +19,12 @@ router.get("/listar/animes", function (req, res) {
 router.get("/listar/series", function (req, res) {
     avisoController.listar(req, res, "series");
 });
-router.get("/listar/idUsuario", function (req, res) {
-    avisoController.listar(req, res);
-});
 router.get("/listar/:idUsuario", function (req, res) {
-    avisoController.listarPorUsuario(req, res);
+    avisoController.listapostagem(req, res);
 });
+// router.get("/listar/:idUsuario", function (req, res) {
+//     avisoController.listarPorUsuario(req, res);
+// });
 
 router.get("/pesquisar/:descricao", function (req, res) {
     avisoController.pesquisarDescricao(req, res);

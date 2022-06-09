@@ -748,10 +748,11 @@ body {
     margin: 10px;
 }
 .card_post{
+    color: #fff;
     width: 100%;
     min-height: 400px;
     border: 5px solid #654597;
-    margin: 10px;
+    margin-bottom: 10px;
     padding: 20px;
     border-radius: 10px;
     background-color: #333;
@@ -793,18 +794,19 @@ body {
     width: 600;
     height: 50px;
     color: #654597;
-    margin: 30px;
-
+    /* margin-top: 100px; */
+    position: static;
 }
 .desc_img{
     width: 600px;
     height: 300px;
     padding: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
     flex-direction: column;
+
 }
 /* coisas do rover */
 .alerta_erro{

@@ -79,32 +79,16 @@
                             </div>
                         </div>
                         <div id="div_erros_login">
-
-                        <div id="div_aguardar" class="loading-div">
-                            <img src="./assets/circle-loading.gif" id="loading-gif">
+                            <div id="div_aguardar" class="loading-div">
+                                <img src="./assets/circle-loading.gif" id="loading-gif">
+                            </div>
+                            <div id="div_erros_login">
+                            </div>
+                            <a class="close" onclick="popupToggle();"><img src="https://cdn-icons-png.flaticon.com/512/864/864393.png" alt=""></a>
                         </div>
-
-                        <div id="div_erros_login">
-                        </div>
-                        <a class="close" onclick="popupToggle();"><img
-                                src="https://cdn-icons-png.flaticon.com/512/864/864393.png" alt=""></a>
                     </div>
                 </div>
                 <div id="card_post"></div>
-                <div class="card_post">
-                    <div class="assunto_post"> Melhor campeão q já existiu!!! </div>
-                    <div class="box_post_imgeDesc">
-                        <div class="img_post"> <img
-                                src="https://c4.wallpaperflare.com/wallpaper/994/445/313/hextech-rammus-league-of-legends-riot-games-skin-hd-wallpaper-thumb.jpg"
-                                alt=""></div>
-                        <div class="desc_img">
-                            <p>cabei de destruir uma partida de rammus, slk muito easy kkkk alguem ae pra ser
-                                carregado?:) add ae "HEXTEC Wlad" </p>
-                            <div class="info_usuario">Postado por <span>wlad</span> dia 05/06/22 as 13:30 pm</div>
-                        </div>
-                    </div>
-                <!-- </div> -->
-                <!-- </div> -->
             </div>
         </div>
     </div>
@@ -200,12 +184,12 @@
         cardErro.style.display = "none"
     }
 
-    function lista(){
+    function lista() {
         fetch("/avisos/listar/jogos", {
             method: "GET"
         }).then(function (resposta) {
             if (resposta.ok) {
-                resposta.json().then(json => {  
+                resposta.json().then(json => {
                     console.log(json)
                     listar(json);
                 });
@@ -217,14 +201,14 @@
     function listar(postagens) {
         // var user_name = sessionStorage.USER_NAME
 
-        for (var contador = postagens.length -1 ; contador >= 0 ; contador--) {
+        for (var contador = postagens.length - 1; contador >= 0; contador--) {
             card_post.innerHTML += `<div class="card_post">
                     <div class="assunto_post"> ${postagens[contador].titulo_postagem} </div>
                     <div class="box_post_imgeDesc">
                         <div class="img_post"> <img src="${postagens[contador].link_img_post}" alt=""></div>
                         <div class="desc_img">
                             <p>"${postagens[contador].descricao_post}" </p>
-                            <div class="info_usuario">Postado por <span>${postagens[contador].user_name}</span> dia 05/06/22 as 13:30 pm</div>
+                            <div class="info_usuario">Postado por <span>${postagens[contador].user_name}</span></div>
                         </div>
                     </div>
                     </div>`
