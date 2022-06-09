@@ -1,23 +1,9 @@
 var database = require("../database/config");
 
-function listar() {
+function listar(categoria) {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
-        SELECT 
-            a.id_postagem,
-            a.titulo_postagem,
-            a.link_img_post,
-            a.categoria_postagem,
-            a.descricao_post,
-            a.fk_usuario,
-            u.id AS idUsuario,
-            u.user_name,
-            u.user_email,
-            u.user_password,
-            u.user_year
-        FROM postagem a
-            INNER JOIN usuario u
-                ON a.fk_usuario = u.id;
+    select * from postagem where categoria_postagem = "${categoria}";
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

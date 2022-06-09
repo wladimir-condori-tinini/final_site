@@ -5,8 +5,8 @@ function testar(req, res) {
     res.send("ENTRAMOS NO AVISO CONTROLLER");
 }
 
-function listar(req, res) {
-    avisoModel.listar().then(function (resultado) {
+function listar(req, res, categoria) {
+    avisoModel.listar(categoria).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -66,11 +66,11 @@ function pesquisarDescricao(req, res) {
 }
 
 function publicar(req, res) {
-    var titulo = req.body.assuntoVar;
-    var link_img = req.params.img_linkVar;
-    var categoria = req.params.categoriaVar;
-    var descricao = req.body.descricaoVar;
-    var fk_usuario = req.body.fk_usuarioVar;
+    var titulo = req.body.titulo_postagem;
+    var link_img = req.body.link_img_postagem;
+    var categoria = req.body.categoria_postagem;
+    var descricao = req.body.descricao_postagem;
+    var fk_usuario = req.params.idUsuario;
 
     if (titulo == undefined) {
         res.status(400).send("O título está indefinido!");

@@ -7,8 +7,17 @@ router.get("/", function (req, res) {
     avisoController.testar(req, res);
 });
 
-router.get("/listar", function (req, res) {
-    avisoController.listar(req, res);
+router.get("/listar/jogos", function (req, res) {
+    avisoController.listar(req, res, "jogos");
+});
+router.get("/listar/filmes", function (req, res) {
+    avisoController.listar(req, res, "filmes");
+});
+router.get("/listar/animes", function (req, res) {
+    avisoController.listar(req, res, "animes");
+});
+router.get("/listar/series", function (req, res) {
+    avisoController.listar(req, res, "series");
 });
 
 router.get("/listar/:idUsuario", function (req, res) {
