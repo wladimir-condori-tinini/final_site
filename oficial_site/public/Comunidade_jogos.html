@@ -90,8 +90,8 @@
                                 src="https://cdn-icons-png.flaticon.com/512/864/864393.png" alt=""></a>
                     </div>
                 </div>
-                <div id="card_post">
-                <div class="card_post" >
+                <div id="card_post"></div>
+                <div class="card_post">
                     <div class="assunto_post"> Melhor campeão q já existiu!!! </div>
                     <div class="box_post_imgeDesc">
                         <div class="img_post"> <img
@@ -103,8 +103,8 @@
                             <div class="info_usuario">Postado por <span>wlad</span> dia 05/06/22 as 13:30 pm</div>
                         </div>
                     </div>
-                </div>
-                </div>
+                <!-- </div> -->
+                <!-- </div> -->
             </div>
         </div>
     </div>
@@ -119,6 +119,7 @@
         var assuntoVar = input_assunto.value;
         var img_linkVar = input_link_img.value;
         var descricaoVar = input_descricao.value;
+        var categoriaVar = "jogos"
         var fk_usuarioVar = sessionStorage.ID_USUARIO;
 
         if (assuntoVar == "" || img_linkVar == "" || descricaoVar == "") {
@@ -214,9 +215,9 @@
         })
     }
     function listar(postagens) {
-        var user_name = sessionStorage.USER_NAME
+        // var user_name = sessionStorage.USER_NAME
 
-        for (var contador = postagens.length -1 ; contador <= 0 ; contador--) {
+        for (var contador = postagens.length -1 ; contador >= 0 ; contador--) {
             card_post.innerHTML += `<div class="card_post">
                     <div class="assunto_post"> ${postagens[contador].titulo_postagem} </div>
                     <div class="box_post_imgeDesc">
