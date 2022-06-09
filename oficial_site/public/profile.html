@@ -11,7 +11,7 @@
 
 </head>
 
-<body onload="profile_info()">
+<body onload="profile_info(), lista()">
     <div class="body_home"> 
         <div class="header_home">
             <div class="navbar_home">
@@ -64,17 +64,7 @@
                     <p>CURTO ANIMES E JOGAR BEM VINDO AO MEU PERFIL
                     </p>
                 </div>
-                <div class="div_txt_user">*Publicar*</div>
-                <select name="Categoria" class="select_conf" id="">
-                    <option value="Comunidade">Comunidade</option>
-                    <option value="jogos">Jogos</option>
-                    <option value="filmes">Filmes</option>
-                    <option value="animes">Animes</option>
-                    <option value="series">Séries</option>
-                </select>
-                    <input type="text" class="assunto_post" placeholder="Assunto" id="input_assunto">
-                    <input type="text" class="post_descricao_user" placeholder="Descrição" id="input_descricao">
-                    <button id="btn_simples">Publicar</button>
+                <div class="div_txt_user">*Publicações*</div>
             </div>
         </div>
     </div>
@@ -95,4 +85,34 @@ function profile_info(){
     span_nome.innerHTML = nome
     span_idade.innerHTML = idade
 }
+function lista(){
+        fetch("/avisos/listar/idUsuario", {
+            method: "GET"
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(json => {  
+                    console.log(json)
+                    listar(json);
+                });
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+    }
+    function listar(idUsuario) {
+        // var user_name = sessionStorage.USER_NAME
+
+        for (var contador = postagens.length -1 ; contador >= 0 ; contador--) {
+            card_post.innerHTML += `<div class="card_post">
+                    <div class="assunto_post"> ${postagens[contador].titulo_postagem} </div>
+                    <div class="box_post_imgeDesc">
+                        <div class="img_post"> <img src="${postagens[contador].link_img_post}" alt=""></div>
+                        <div class="desc_img">
+                            <p>"${postagens[contador].descricao_post}" </p>
+                            <div class="info_usuario">Postado por <span>${postagens[contador].user_name}</span> dia 05/06/22 as 13:30 pm</div>
+                        </div>
+                    </div>
+                    </div>`
+        }
+    }
 </script>

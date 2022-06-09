@@ -5,10 +5,10 @@ function testar(req, res) {
     res.send("ENTRAMOS NO AVISO CONTROLLER");
 }
 
-function listar(req, res, categoria) {
+function listar(req, res, idUsuario) {
     avisoModel.listar(categoria).then(function (resultado) {
         if (resultado.length > 0) {
-            res.status(200).json(resultado);
+            res.status(200).json(idUsuario);
         } else {
             res.status(204).send("Nenhum resultado encontrado!")
         }
