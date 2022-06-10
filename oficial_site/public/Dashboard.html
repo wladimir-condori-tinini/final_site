@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>DashBoard</title>
     <link rel="stylesheet" href="siteoficial.css">
-    <script src="../js/funcoes.js"></script>
-    <script src="js/home.js"></script>
+    <script src="js/funcoes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="listar_usuarios()">
+<body onload="profile_info() , lista()">
     <div class="body_home">
         <div class="header_home">
             <div class="navbar_home">
@@ -21,7 +21,7 @@
                         <label class="menu__btn" for="menu__toggle">
                             <span></span>
                         </label>
-                        
+
                         <ul class="menu__box">
                             <li><a class="menu__item" href="home.html">Home</a></li>
                             <li><a class="menu__item" href="profile.html">Meu Perfil</a></li>
@@ -46,39 +46,59 @@
                 <div class="txt_usuario" onclick="limparSessao()">Sair</div>
             </div>
         </div>
-        <div class="bannerpgi">
-            <div class="card_tela_pgini" id="div_home_sb">
+        <div class="bannerpgp">
+            <div class="card_tela_pgperfil">
+                <div id="card_post" class="card_post_dash">
+                    <p>Numero de Postagem por Comunidade</p>
+                    <div class="linha_box_dash">
+                        <div class="box_dash"></div>
+                        <div class="box_dash"></div>
+                        <div class="box_dash"></div>
+                        <div class="box_dash"></div>
+                    </div>
+                </div>
+                <div id="card_post" class="card_post">
+                    <p>Grafico de posts por dia da semana</p>
+                    <div class="canvas_dash">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    </div>
 </body>
-
-</html>
 <script>
-    function listar_usuarios() {
-        fetch("/usuarios/listar", {
-            method: "GET"
-        }).then(function (resposta) {
-            if (resposta.ok) {
-                resposta.json().then(json => {  
-                    listar_div(json);
-                });
-            }
-        }).catch(function (erro) {
-            console.log(erro);
-        })
-    }
-    function listar_div(usuarios){
-        for(var contador = usuarios.length -1 ; contador > 0; --contador){
-            div_home_sb.innerHTML += `<div class="div_bem_vindo">
-    Seja bem-vindo <span > ${usuarios[contador].user_name}</span> !!!
-</div>`
-        }
-    }
-    function limparSessao() {
-    // aguardar();
-    sessionStorage.clear();
-    // finalizarAguardar();
-    window.location = "index.html";
-}
-</script>
+    const labels = [
+      'SEG',
+      'TER',
+      'QUA',
+      'QUI',
+      'SEX',
+      'SAB',
+      'dom',
+    ];
+  
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: 'numero de postagens na semana',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: [0, 10, 5, 2, 20, 30, 45],
+      }]
+    };
+  
+    const config = {
+      type: 'bar',
+      data: data,
+      options: {}
+    };
+  </script>
+  <script>
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+  </script>
+</html>
