@@ -1,14 +1,7 @@
 var database = require("../database/config");
 
-function buscarUltimasMedidas(idAquario, limite_linhas) {
-    instrucaoSql = `select 
-                        temperatura, 
-                        umidade, 
-                        momento,
-                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico
-                    from medida
-                    where fk_aquario = ${idAquario}
-                    order by id desc limit ${limite_linhas}`;
+function buscarPostagensPorCategoria() {
+    instrucaoSql = `SELECT COUNT(id_postagem) AS posts, categoria_postagem FROM postagem GROUP BY categoria_postagem`;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
@@ -27,6 +20,6 @@ function buscarMedidasEmTempoReal(idAquario) {
 
 
 module.exports = {
-    buscarUltimasMedidas,
+    buscarPostagensPorCategoria,
     buscarMedidasEmTempoReal
 }
